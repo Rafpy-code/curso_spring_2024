@@ -4,29 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import models.Resultado;
 import services.interfaces.BuscadorService;
 
 @Service
 public class BuscadorServiceImpl implements BuscadorService {
-	static List<Resultado> resultados = new ArrayList<>(
-			List.of(new Resultado("http://www.fnac.es", "libros", "Libros y más"),
-					new Resultado("http://www.mybook.com", "libros", "librería de temas varios"),
-					new Resultado("http://www.game.es", "juegos", "Juegos variados"),
-					new Resultado("http://www.music.es", "música", "La mejor música"),
-					new Resultado("http://www.tech.com", "libros", "Libros técnicos"),
-					new Resultado("http://www.eljuego.es", "juegos", "Juegos on-line")));
 
+	@PersistenceContext // Para inyectar el EntityManager
+	EntityManager em;
+	
+	@Transactional // Para que spring inicie y confirme la transacción automáticamente
+	@Override
+	public void agregar(Resultado resultado) {		
+		em.persist(resultado);		
+	}
+	
+	// Al select no se le pone la anotación @Transactional
 	@Override
 	public List<Resultado> buscar(String tematica) {
-		return resultados.stream().filter(r -> r.getTematica().equals(tematica)).toList();
+		String jpql = "select r from Resutado r where r.tematica = ?1";
+		TypedQuery<Resultado> query= em.createQuery(jpql, Resultado.class);
+		query.setParameter(1, tematica);
+		return query.getResultList();		
 	}
 
-	@Override
-	public void agregar(Resultado resultado) {
-		resultados.add(resultado);
-
-	}
+	
 
 }
