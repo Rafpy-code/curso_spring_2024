@@ -17,14 +17,16 @@ public class BuscadorServiceImpl implements BuscadorService {
 					new Resultado("http://www.music.es", "música", "La mejor música"),
 					new Resultado("http://www.tech.com", "libros", "Libros técnicos"),
 					new Resultado("http://www.eljuego.es", "juegos", "Juegos on-line")));
+
 	@Override
 	public List<Resultado> buscar(String tematica) {
 		return resultados.stream().filter(r -> r.getTematica().equals(tematica)).toList();
 	}
+
 	@Override
 	public void agregar(Resultado resultado) {
 		resultados.add(resultado);
-		
+
 	}
 
 }

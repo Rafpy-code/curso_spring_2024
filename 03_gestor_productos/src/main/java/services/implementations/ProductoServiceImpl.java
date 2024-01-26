@@ -4,16 +4,22 @@ package services.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import models.Producto;
-public class ProductoServiceImpl {
+import services.interfaces.ProductoService;
+
+@Service
+public class ProductoServiceImpl implements ProductoService {
 
 		private static List<Producto> productos = new ArrayList<>();
 
-		public void agregarProducto(String nombre, double precio, String categoria) {
-			productos.add(new Producto(nombre,precio,categoria));
-			System.out.println("Producto añadido correctamente.");
+		@Override
+		public void agregarProducto(Producto producto) {
+			productos.add(producto);
 		}
 
+		@Override
 		public List<Producto> mostrarCategoria(String categoria) {
 			List<Producto> encontrados = new ArrayList<Producto>();
 			for (Producto p : productos) {
@@ -25,6 +31,7 @@ public class ProductoServiceImpl {
 			return encontrados;
 		}
 		
+		@Override
 		public List<Producto> mostrarCategoriaFuncional(String categoria) {
 			for(Producto p : productos) {
 				System.out.println("mostrarCategoriaFuncional->"+p.getNombre()+"-"+p.getPrecio());
@@ -34,6 +41,7 @@ public class ProductoServiceImpl {
 					.toList();
 		}
 
+		@Override
 		public void eliminarProducto(String nombre) {
 			for (int i = 0; i < productos.size(); i++) {
 				if (productos.get(i).getNombre().equals(nombre)) {
@@ -42,7 +50,9 @@ public class ProductoServiceImpl {
 			}
 		}
 		
+		@Override
 		public void eliminarProductoFuncional(String nombre) {
 			productos.removeIf(p->p.getNombre().equals(nombre));
 		}
+
 	}
