@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″ />
+<title>Alta</title>
+</head>
+<body>
+	<div>
+		<h1>Añadir nueva temática <span th:text="${serverTime}" /></h1>
+		<form action="alta" method="post" accept-charset="utf-8">
+			<p>
+				<input type="text" name="url" placeholder="URL">
+			</p><br>
+			<p>
+				<input type="text" name="tematica" placeholder="¿Cúal es la temática?">
+			</p><br>
+			<p>
+				<input type="text" name="descipcion" placeholder="Descripción"> 
+			</p><br>
+			<p>
+				<input type="submit" value="Añadir"> 
+			</p><br>				
+		</form>
+	</div>	
+</body>
+</html>
