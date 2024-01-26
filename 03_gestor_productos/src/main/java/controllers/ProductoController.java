@@ -25,14 +25,14 @@ public class ProductoController {
 		return "productos"; // Nombre de la página a la que debe dirigirnos el FrontController
 	}
 
-	@PostMapping(value = "doAlta")
+	@PostMapping(value = "alta")
 	public String alta(@ModelAttribute Producto producto) {
 		productoService.agregarProducto(producto);
 		return "inicio";
 	}
 	
-	@PostMapping(value = "doEliminar")
-	public String eliminar(@ModelAttribute String nombre) {
+	@GetMapping(value = "eliminar")
+	public String eliminar(@RequestParam("nombre")String nombre) {
 		productoService.eliminarProductoFuncional(nombre);
 		return "inicio"
 ;	}

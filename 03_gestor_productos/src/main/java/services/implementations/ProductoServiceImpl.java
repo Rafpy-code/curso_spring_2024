@@ -17,6 +17,7 @@ public class ProductoServiceImpl implements ProductoService {
 		@Override
 		public void agregarProducto(Producto producto) {
 			productos.add(producto);
+			System.out.println("Producto añadido " + producto.getNombre());
 		}
 
 		@Override
@@ -53,6 +54,7 @@ public class ProductoServiceImpl implements ProductoService {
 		@Override
 		public void eliminarProductoFuncional(String nombre) {
 			productos.removeIf(p->p.getNombre().equals(nombre));
+			System.out.println("producto eliminado " + nombre);
 		}
 
 	}
