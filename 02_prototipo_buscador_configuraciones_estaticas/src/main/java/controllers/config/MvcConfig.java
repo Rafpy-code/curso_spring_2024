@@ -23,9 +23,9 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("menu");
-		registry.addViewController("toMenu").setViewName("menu");
-		registry.addViewController("toAlta").setViewName("alta");
-		registry.addViewController("toBuscar").setViewName("buscar");
+		registry.addViewController("/toMenu").setViewName("menu");
+		registry.addViewController("/toAlta").setViewName("alta");
+		registry.addViewController("/toBuscar").setViewName("buscar");
 	}
 
 }

@@ -29,7 +29,7 @@ public class BuscadorController {
 	@PostMapping(value = "alta")
 	public String alta(@ModelAttribute Resultado resultado) {
 		buscadorService.agregar(resultado);
-		return "menu";
+		return "buscar";
 	}
 
 }
