@@ -20,8 +20,10 @@ public class ProductosController {
 	ProductosService productosService;
 
 	@PostMapping(value = "alta")
-	public String alta(@ModelAttribute Producto producto) {
-		productosService.alta(producto);
+	public String alta(@ModelAttribute Producto producto, Model model) {
+		if(!productosService.alta(producto)) {
+			model.addAttribute("mensajeAlta","Producto "+producto.getNombre()+" repetido, no se añadió!!!");
+		}		
 		return "menu";
 	}
 
@@ -42,7 +44,12 @@ public class ProductosController {
 
 	@GetMapping(value = "eliminar")
 	public String eliminar(@RequestParam("nombre") String nombre, Model model) {
-		productosService.eliminarProducto(nombre);
+		Producto producto = productosService.eliminarProducto(nombre);
+		if(producto!=null) {
+			model.addAttribute("mensajeEliminar","se ha eliminado el producto "+nombre+" de la categoría "+producto.getCategoria());
+		}else {
+			model.addAttribute("mensajeEliminar","el producto "+nombre+ " no existe!!!");
+		}
 		return "menu";
 	}
 }

@@ -17,5 +17,7 @@
 		<a href="toModificar">Modificar producto por nombre</a>  
 		<a href="toEliminar">Eliminar producto por nombre</a>
 	</div>
+	<div th:if="${mensajeAlta}" th:text="${mensajeAlta}"></div>
+	<div th:if="${mensajeEliminar}" th:text="${mensajeEliminar}"></div>
 </body>
 </html> 

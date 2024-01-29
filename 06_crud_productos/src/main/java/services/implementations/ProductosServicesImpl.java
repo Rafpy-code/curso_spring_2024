@@ -53,12 +53,15 @@ public class ProductosServicesImpl implements ProductosService {
 	@Transactional
 	@Override
 	public void mofificarPrecioProducto(String nombre, double nuevoPrecio) {
-		String jpql = "update Producto p set p.precio=?1 where p.nombre=?2";
-		Query query = em.createQuery(jpql);
-		query.setParameter(1, nuevoPrecio);
-		query.setParameter(2, nombre);
-		query.executeUpdate();
-
+		/*
+		 * String jpql = "update Producto p set p.precio=?1 where p.nombre=?2"; Query
+		 * query = em.createQuery(jpql); query.setParameter(1, nuevoPrecio);
+		 * query.setParameter(2, nombre); query.executeUpdate();
+		 */
+		Producto producto = buscarProductoPorNombre(nombre);
+		if(producto !=null) {
+			em.merge(producto);
+		}
 	}
 
 	@Transactional
