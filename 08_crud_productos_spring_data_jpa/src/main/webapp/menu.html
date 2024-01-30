@@ -10,15 +10,16 @@
 <link rel="stylesheet" type="text/css" th:href="@{estilos.css}">
 </head>
 <body>
+	<figure>
+		<img th:src="1.webp" alt="producros">
+	</figure>
 	<div>
 		<h1>Gestor de Productos</h1>
-		<figure>
-			<img th:src="1.webp" alt="producros">
-		</figure>
-		<a href="toAlta">Alta nuevo producto</a> 
-		<a href="toBuscar">Productos por categoría</a>
-		<a href="toModificar">Modificar producto por nombre</a>  
-		<a href="toEliminar">Eliminar producto por nombre</a>
+		
+		<a href="toAlta">Alta</a> 
+		<a href="toBuscar">Productos</a>
+		<a href="toModificar">Modificar</a>  
+		<a href="toEliminar">Eliminar</a>
 	</div>
 	<div th:if="${mensajeAlta}" th:text="${mensajeAlta}"></div>
 	<div th:if="${mensajeEliminar}" th:text="${mensajeEliminar}"></div>

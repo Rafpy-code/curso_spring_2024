@@ -5,14 +5,16 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableJpaRepositories(basePackages = "dao.interfaces", entityManagerFactoryRef = "factory", transactionManagerRef = "txManager")
 @EnableTransactionManagement // ésta anotación habilita la transaccionalidad 
-@ComponentScan(basePackages = { "services.implementations", "dao.implementations"}) // Poner todas las impl de las interfaces
+@ComponentScan(basePackages = { "services.implementations"}) // Poner todas las impl de las interfaces
 @Configuration
 public class ServiceConfig {
 	// creación del objeto DataSource con los datos de conexión a la BD

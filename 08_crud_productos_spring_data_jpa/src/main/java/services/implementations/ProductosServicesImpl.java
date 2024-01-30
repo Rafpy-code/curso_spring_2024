@@ -41,7 +41,7 @@ public class ProductosServicesImpl implements ProductosService {
 	public void mofificarPrecioProducto(String nombre, double nuevoPrecio) {
 		Producto producto = productosDao.findByNombre(nombre);
 		if (producto != null) {
-			productosDao.update(producto);
+			productosDao.save(producto);
 		}
 	}
 
@@ -50,16 +50,15 @@ public class ProductosServicesImpl implements ProductosService {
 	public Producto eliminarProducto(String nombre) {
 		Producto p = productosDao.findByNombre(nombre);
 		if (p != null) {
-			productosDao.delete(p);
+			productosDao.deleteByNombre(nombre);
 			return p;
 		}
 		return null;
 	}
 
 	@Override
-	public List<Producto> getProductos() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Producto> todos() {
+		return productosDao.findAll();
 	}
 
 }
