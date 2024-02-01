@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import dao.ClientesDao;
 import dtos.ClienteDto;
 import mappers.Mapeador;
+import model.Cliente;
 import service.interfaces.ClientesService;
 @Service
 public class ClientesServiceImpl implements ClientesService {
@@ -17,7 +18,8 @@ public class ClientesServiceImpl implements ClientesService {
 
 	@Override
 	public ClienteDto autenticarCliente(String usuario, String password) {
-		return mapeador.clienteEntityToDto(clientesDao.findByUsuarioAndPassword(usuario, password));
+		Cliente cliente = clientesDao.findByUsuarioAndPassword(usuario, password);
+		return cliente != null ? mapeador.clienteEntityToDto(cliente):null;
 	}
 
 	@Override
