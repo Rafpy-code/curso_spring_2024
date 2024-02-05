@@ -28,7 +28,7 @@ public class LibreriaController {
 	@PostMapping(value="alta")
 	public String altaCliente(@ModelAttribute ClienteDto cliente, Model model) {
 		if(!clientesService.altaCliente(cliente)) {
-			model.addAttribute("mensaje","Usuario repetido, no se pudo registrar");
+			model.addAttribute("mensaje","Este usuario ya existe, no se puede volver a registrar");
 			return "nuevo";
 		}
 		return "login";

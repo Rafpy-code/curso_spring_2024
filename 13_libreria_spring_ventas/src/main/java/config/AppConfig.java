@@ -7,6 +7,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import controller.config.MvcConfig;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRegistration;
 import service.config.ServiceConfig;
 

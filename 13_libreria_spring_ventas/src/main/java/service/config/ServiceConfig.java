@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 @EnableJpaRepositories(basePackages = "dao",entityManagerFactoryRef = "factory",transactionManagerRef = "txManager")
 @EnableTransactionManagement //habilita la transaccionalidad usando anotación @Transactional
 @ComponentScan(basePackages = {"service.implementations", "mappers"})

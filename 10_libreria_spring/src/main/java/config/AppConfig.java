@@ -10,6 +10,7 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletRegistration;
 import service.config.ServiceConfig;
 
+
 public class AppConfig implements WebApplicationInitializer {
 	 @Override
 	 public void onStartup(ServletContext container) {
