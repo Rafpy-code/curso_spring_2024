@@ -2,65 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>Lista de libros</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="gestionarPeticion.js" defer></script>
+<style type="text/css">
+body {
+	color: purple;
+}
+
+h1 {
+	text-align: center;
+}
+
+div {
+	width: 400px;
+	margin: 50px auto;
+	padding: 15px;
+	background-color: smocke;
+	border: 1px solid purple; input { display : block;
+	margin-bottom: 15px;
+}
+
+input {
+	color: purple;
+	margin: 0 auto; 
+	display : block;
+	margin-bottom: 15px;
+	border: 1px solid purple;
+	padding: 7px;
+	display: block;
+}
+table {
+	border: 1px dashed purple;
+	margin: 0 auto;
+}
+
+th, td {
+	padding: 5px;
+	border: 1px solid purple;
+}
+td{
+text-align: right;
+}
+a {
+	display: block;
+	width:40%;
+	border: 1px solid purple; 
+	margin: 0 auto;
+	margin-bottom : 20px;
+	padding: 15px;
+	margin-top: 20px;
+	text-decoration: none;
+	text-align: center;
+}
+a:hover {
+	background: purple;
+	color:white;
+}}
+</style>
 </head>
 <body>
-	<center>
-		Seleccione Tema:
-		<select id="temaSel">
-			<option value="0">-Todos-</option>			
-			<option th:each="t:${temas}" th:value="${t.idTema}" th:text="${t.tema}"></option>			
-		</select>
-		<br><br>
-		<div id="tbLibros">
-		
-		</div>
+	<div>
+		<a href="toMenu">MENÚ</a>
 		<br>
+		Seleccione Tema: <select id="temaSel">
+			<option value="0">-Todos-</option>
+			<option th:each="t:${temas}" 
+					th:value="${t.idTema}"
+					th:text="${t.tema}">
+			</option>
+		</select> 
+		<br /><br />
+		<span id="tbLibros"></span>
+		<br />
 		<h2>Carrito</h2>
-		<div id="tbCarrito">
-		
+		<div>
+			<a href="comprar">Finalizar compra</a>
 		</div>
-	</center>
-<!-- 	<script type="text/javascript"> 
-		$("#temaSel").change(function(){
-			var url="libros";
-			var params={"idTema":$("#temaSel").val()};
-			gestionarPeticion(url,params);
-		});
-	
-	function gestionarPeticion(url,params){
-		$.get(url,params,function(data){
-			var tabla="<table border='1'><tr><th>Titulo</th><th>Precio</th><th>P�ginas</th><th>Tema</th><th></th></tr>";
-			$.each(data,function(i,p){
-				tabla+="<tr><td>"+p.titulo+"</td><td>"+p.precio+"</td><td>"+p.paginas+"</td><td>"+p.temaDto.tema+"</td><td><a href='#' onclick='agregarCarrito("+p.isbn+")'>Agregar</a></td></tr>";
-			});
-			tabla+="</table>";
-			$("#tbLibros").html(tabla);
-		});
-	}
-	function agregarCarrito(isbn){	
-		var url="agregarCarrito";
-		var params={"isbn":isbn};
-		pintarCarrito(params,url);
-	}
-	
-	function quitarCarrito(pos){	
-		var url="quitarCarrito";
-		var params={"pos":pos};
-		pintarCarrito(params,url);
-	}
-	function pintarCarrito(params,url){
-		$.get(url,params,function(data){
-			var tabla="<table border='1'><tr><th>Titulo</th><th>Precio</th><th>P�ginas</th><th>Tema</th><th></th></tr>";
-			$.each(data,function(i,p){
-				tabla+="<tr><td>"+p.titulo+"</td><td>"+p.precio+"</td><td>"+p.paginas+"</td><td>"+p.temaDto.tema+"</td><td><a href='#' onclick='quitarCarrito("+i+")'>Quitar</a></td></tr>";
-			});
-			tabla+="</table>";
-			$("#tbCarrito").html(tabla);
-		});
-	}
-	</script> -->
+		<span id="tbCarrito"></span>
+	</div>
 </body>
 </html>

@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import dtos.ClienteDto;
 import dtos.LibroDto;
 import jakarta.servlet.http.HttpSession;
 import service.interfaces.ClientesService;
 import service.interfaces.LibrosService;
+import service.interfaces.VentasService;
 
 @Controller
 public class LibreriaController {
@@ -24,22 +26,34 @@ public class LibreriaController {
 	LibrosService librosService;
 	@Autowired
 	ClientesService clientesService;
+	@Autowired
+	VentasService ventasService;
 	
 	@PostMapping(value="alta")
 	public String altaCliente(@ModelAttribute ClienteDto cliente, Model model) {
 		if(!clientesService.altaCliente(cliente)) {
-			model.addAttribute("mensaje","Este usuario ya existe, no se puede volver a registrar");
+			model.addAttribute("mensaje","Usuario repetido, no se pudo registrar");
 			return "nuevo";
 		}
 		return "login";
 	}
 	@GetMapping(value="login")
-	public String login(@RequestParam("usuario") String usuario,
-			@RequestParam("password") String password, Model model) {
-		if(clientesService.autenticarCliente(usuario, password)==null) {
+	public String login( @RequestParam("usuario") String usuario,
+			@RequestParam("password") String password, Model model,HttpSession sesion) {
+		ClienteDto dto=clientesService.autenticarCliente(usuario, password);
+		if(dto==null) {
 			model.addAttribute("mensaje", "Usuario no existente, registrese");
 			return "login";
 		}
+		//guardamos el cliente completo en un atributo de sesión
+		sesion.setAttribute("cliente", dto);
+		
+		return "menu";
+	}
+	
+	@GetMapping(value="consulta")
+	public String consulta( Model model) {
+		
 		model.addAttribute("temas", librosService.getTemas());
 		return "visor";
 	}
@@ -70,6 +84,21 @@ public class LibreriaController {
 		
 		sesion.setAttribute("carrito", carrito);
 		return carrito;
+	}
+	@GetMapping(value="ventas")
+	public String ventas(HttpSession sesion, Model model) {
+		ClienteDto dto=(ClienteDto)sesion.getAttribute("cliente");
+		model.addAttribute("ventas",ventasService.informeVentasCliente(dto.getUsuario()));
+		return "ventas";
+	}
+	
+	public String comprar(HttpSession sesion) {
+		ClienteDto cliente = (ClienteDto) sesion.getAttribute("cliente");
+		List<LibroDto> libros = (List<LibroDto>)sesion.getAttribute("carrito");
+		ventasService.registrarCompra(cliente.getUsuario(), libros);
+		sesion.invalidate();
+		return "login";
+		
 	}
 	
 }
