@@ -37,7 +37,7 @@ public class LibreriaController {
 		}
 		return "login";
 	}
-	@GetMapping(value="login")
+	@PostMapping(value="login")
 	public String login( @RequestParam("usuario") String usuario,
 			@RequestParam("password") String password, Model model,HttpSession sesion) {
 		ClienteDto dto=clientesService.autenticarCliente(usuario, password);
@@ -47,13 +47,11 @@ public class LibreriaController {
 		}
 		//guardamos el cliente completo en un atributo de sesión
 		sesion.setAttribute("cliente", dto);
-		
 		return "menu";
 	}
 	
 	@GetMapping(value="consulta")
 	public String consulta( Model model) {
-		
 		model.addAttribute("temas", librosService.getTemas());
 		return "visor";
 	}
@@ -92,6 +90,7 @@ public class LibreriaController {
 		return "ventas";
 	}
 	
+	@GetMapping(value="comprar")
 	public String comprar(HttpSession sesion) {
 		ClienteDto cliente = (ClienteDto) sesion.getAttribute("cliente");
 		List<LibroDto> libros = (List<LibroDto>)sesion.getAttribute("carrito");

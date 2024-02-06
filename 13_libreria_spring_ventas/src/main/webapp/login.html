@@ -67,7 +67,7 @@ a:hover {
 </style>
 </head>
 <body>
-<form action="login" method="get">
+	<form action="login" method="post">
 		<h2>Log in</h2>
 		<div>
 			Usuario:<input type="text" name="usuario" placeholder="Ingrese su usuario" /><br>
@@ -76,9 +76,7 @@ a:hover {
 			<br>
 			<br>
 			<a href="toNuevo">Registrese</a>
-			
 		</div>
-		
 	</form> 
 	<div th:if="${mensaje}" th:text="${mensaje}"></div>
 </body>

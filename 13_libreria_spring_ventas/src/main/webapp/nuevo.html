@@ -66,13 +66,13 @@ a:hover {
 </head>
 <body>
 	<div>
-		<h1>A�adir nuevo cliente</h1>
+		<h1>Añadir nuevo cliente</h1>
 		<form action="alta" onsubmit="return validar();" method="post">
 			Usuario:<input type="text" id="usuario" name="usuario" placeholder="Usuario">
-			Password:<input type="password" id="password" name="password" placeholder="Contrase�a">
-			Repetir password:<input type="password" id="repetir" name="repetir" placeholder="Repetir contrase�a">
+			Password:<input type="password" id="password" name="password" placeholder="Contraseña">
+			Repetir password:<input type="password" id="repetir" name="repetir" placeholder="Repetir contraseña">
 			Email:<input type="text" id="email" name="email" placeholder="Email">
-			Tel�fono:<input type="text" id="telefono" name="telefono" placeholder="Tel�fono">
+			Teléfono:<input type="text" id="telefono" name="telefono" placeholder="0034333666999">
 			<input type="submit" value="Registrar">
 		</form>
 		<br>
@@ -84,15 +84,12 @@ a:hover {
 			var password=$("#password").val();
 			var repetir=$("#repetir").val();
 			if(password!=repetir){
-				alert("Las contrase�as no coinciden!");
+				alert("Las contraseñas no coinciden!");
 				return false;
 			}
 			
 			return true;
 		}
-	
-	
-	
 	</script>
 </body>
 </html>
